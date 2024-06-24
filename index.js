@@ -1,7 +1,9 @@
 
 const fs = require('fs');
 const Discord = require('discord.js');
-const { prefix, token } = require('./config.json');
+const { prefix, token, yt_token } = require('./config.json');
+
+
 
 const client = new Discord.Client();
 client.commands = new Discord.Collection();
@@ -33,3 +35,30 @@ client.on('message', message => {
 });
 
 client.login(token);
+
+
+
+const YouTube = require('simple-youtube-api');
+const youtube = new YouTube
+(yt_token);
+const channel = 814884952599953459;
+const ytdl = require('ytdl-core');
+const Util = require("discord.js"); 
+const queue = new Map();
+
+client.on('message', async msg => { 
+    let message = msg;
+  
+      if (message.author.bot) return;
+      if (message.channel.type === "dm") return; 
+      let prefix = ">"
+      if (!msg.content.startsWith(prefix)) return undefined;
+  
+      const args = msg.content.split(' ');
+      const searchString = args.slice(1).join(' ');
+      const url = args[1] ? args[1].replace(/<(.+)>/g, '$1') : '';
+      const serverQueue = queue.get(msg.guild.id);
+
+      let command = msg.content.toLowerCase().split(' ')[0];
+      command = command.slice(prefix.length)
+});
