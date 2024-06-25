@@ -5,7 +5,7 @@ const { prefix, token, yt_token } = require('./config.json');
 
 
 
-const client = new Discord.Client();
+const client = new Discord.Client({disableEveryone:false});
 client.commands = new Discord.Collection();
 const commandFiles = fs.readdirSync('./Commands').filter(file => file.endsWith('.js'));
 
@@ -38,7 +38,7 @@ client.login(token);
 
 
 
-const YouTube = require('simple-youtube-api');
+const YouTube = require('discord-youtube-api');
 const youtube = new YouTube
 (yt_token);
 const channel = 814884952599953459;
