@@ -4,14 +4,18 @@ const Discord = require('discord.js');
 const { prefix, token, yt_token } = require('./config.json');
 
 
-
-const client = new Discord.Client({ disableEveryone: false });
 client.commands = new Discord.Collection();
+const commandFolders = fs.readdirSync('./Commands');
 const commandFiles = fs.readdirSync('./Commands').filter(file => file.endsWith('.js'));
 
-for (const file of commandFiles) {
-    const command = require(`./Commands/${file}`);
-    client.commands.set(command.name, command);
+
+//getting the actual files and making them into commands
+for (const folder of commandFolders) {
+	const commandFiles = fs.readdirSync(`./Commands/${folder}`).filter(file => file.endsWith('.js'));
+	for (const file of commandFiles) {
+		const command = require(`./Commands/${folder}/${file}`);
+		client.commands.set(command.name, command);
+	}
 }
 
 client.once('ready', () => {
@@ -165,3 +169,9 @@ async function play(guild, song, Channel) {
     serverQueue.textChannel.send(`Started playing: **${song.title}***`)
 
 }
+
+
+
+client.on('error', error => {
+    console.log(error)
+  })
