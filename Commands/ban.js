@@ -12,15 +12,16 @@ module.exports = {
     execute(message, args) {
         const { guild, mentions, member } = message
         const target = mentions.users.first()
-        if(args[0] === mentions.users.first()){
+        if (args[0] === mentions.users.first()) {
             const targetMember = message.guild.members.cache.get(target.id)
             targetMember.ban()
             message.channel.send(`<@${member.id}> user ${target} has been banned`)
         }
         else {
             const Embedp = new Discord.MessageEmbed()
-            .setTitle("Permission error")
-            .setDescription("Either, I don't have permission to ban members or you don't have permission to ban members, or you simply used the wrong format, the format is `~ban <user>`, Make sure to ping them in <user>")
-            message.channel.send(Embedp)        }
+                .setTitle("Permission error")
+                .setDescription("Either, I don't have permission to ban members or you don't have permission to ban members, or you simply used the wrong format, the format is `~ban <user>`, Make sure to ping them in <user>")
+            message.channel.send(Embedp)
+        }
     }
 }
