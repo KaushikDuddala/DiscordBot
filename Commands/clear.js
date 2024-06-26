@@ -25,7 +25,7 @@ module.exports = {
                     message.channel.send(args2[1] + " messages cleared");
                 }
             } else {
-                message.channel.send("You dont have permission lol")
+                message.channel.send("You don't have permission.")
             }
         } else {
 
